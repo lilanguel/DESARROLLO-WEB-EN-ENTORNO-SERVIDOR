@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let dinero = 50;
+        let apuesta = 0;
+
+        while (dinero > 0 && dinero < 200) {
+            apuesta = parseFloat(prompt('Ingrese la cantidad a apostar'))
+            while (apuesta > dinero) {
+                apuesta = parseFloat(prompt('La cantidad a apostar debe ser menor que el dinero en su poder'))
+            }
+            let resultadoApostado = parseInt(prompt('Ingrese el numero del dado al que quiere apostar'))
+            while (resultadoApostado < 1 || resultadoApostado > 6) {
+                resultadoApostado = parseInt(prompt('Debe ser entre 1 y 6'))
+            }
+            let resultado = parseInt(Math.random() * (6 - 1) + 1)
+
+            if (resultado == resultadoApostado) {
+                dinero += apuesta
+            } else {
+                dinero -= apuesta
+            }
+
+            alert('Ha salido el ' + resultado + ' y le quedan ' + dinero)
+        }
+
+        if (dinero <= 0) {
+            alert('Has perdido, te has quedado con 0$')
+        } else if (dinero >= 200) {
+            alert('Has ganado, te has quedado con mas de 200$')
+        }
+
+    </script>
+</body>
+
+</html>

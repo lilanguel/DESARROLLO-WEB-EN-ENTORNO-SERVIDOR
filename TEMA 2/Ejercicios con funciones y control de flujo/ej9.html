@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let n = parseInt(prompt("Introduce un numero positivo de uno o dos dígitos"));
+
+        if (n > 0 && n < 100) {
+            if (n < 10) {
+                alert('El valor ingresado tiene un dígito');
+            } else {
+                alert('El valor ingresado tiene dos dígitos');
+            }
+        } else {
+            alert("Numero introducido incorrecto")
+        }
+    </script>
+</body>
+
+</html>

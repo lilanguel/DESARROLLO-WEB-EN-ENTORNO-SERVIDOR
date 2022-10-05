@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let BI = parseFloat(prompt('Ingrese la base imponible'));
+        let iva = prompt('Ingrese el IVA que se le aplica');
+        let peso = parseFloat(prompt('Ingrese el peso'));
+        let cuotaIVA, gastosEnvio;
+
+        if (iva == 'normal') {
+            cuotaIVA = 0.21
+        } else {
+            cuotaIVA = 0.1
+        }
+
+        if (peso < 1) {
+            gastosEnvio = 3
+        } else if (peso < 3) {
+            gastosEnvio = 5
+        } else {
+            gastosEnvio = 10
+        }
+
+        alert('Precio total: ' + (BI + cuotaIVA * BI + gastosEnvio))
+    </script>
+</body>
+
+</html>

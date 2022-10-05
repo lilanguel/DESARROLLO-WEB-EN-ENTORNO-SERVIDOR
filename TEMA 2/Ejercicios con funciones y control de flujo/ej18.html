@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let sueldo = parseInt(prompt('Ingrese su sueldo'));
+        let antiguedad = parseInt(prompt('Ingrese sus anios de antiguedad'));
+
+        if (sueldo < 1000) {
+            if (antiguedad >= 10) {
+                sueldo = sueldo + sueldo * 0.2;
+                document.write('Sueldo actualizado: ' + sueldo);
+            } else {
+                sueldo = sueldo + sueldo * 0.05;
+                document.write('Sueldo actualizado: ' + sueldo);
+            }
+        } else {
+            document.write('Sueldo: ' + sueldo);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let numero01;
+        let numero02;
+        let promedio;
+
+        numero01 = parseInt(prompt("Ingrese la nota del primer examen"));
+        numero02 = parseInt(prompt("Ingrese la nota del segundo examen"));
+        numero03 = parseInt(prompt("Ingrese la nota del tercer examen"));
+
+        promedio = (numero01+numero02+numero03)/3
+
+        if (promedio < 5) {
+            alert("Repetidor");
+        }
+        else if (promedio >= 5 && promedio < 7) {
+            alert("Superado");
+        } else if (promedio >= 7) {
+            alert("Promocionado");
+        }
+    </script>
+</body>
+
+</html>

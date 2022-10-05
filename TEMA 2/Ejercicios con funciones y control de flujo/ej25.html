@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="texto" type="text" placeholder="Introduce el texto">
+    <input id="ejecutar" type="button" value="Resultado" onclick="ejercicio25();" />
+    <script>
+        function ejercicio25() {
+
+            let cadena = document.getElementById("texto").value;
+            var separador = " ";
+            var longitud = 0;
+            var vector = new Array();
+            var posicion = 0;
+
+            if (cadena.length == 0) {
+                ejercicio25();
+                return;
+            }
+
+            for (var i in cadena) {
+                longitud++;
+            }
+
+            vector[posicion] = "";
+            for (var i = 0; i < longitud; i++) {
+                if (cadena[i] != separador) {
+                    vector[posicion] += cadena[i];
+                }
+                else {
+                    posicion++;
+                    vector[posicion] = "";
+                }
+            }
+
+            alert("La cadena tiene " + vector.length + " palabras" + "\nLa primera palabra es: " + vector[0] +
+                "\nLa ultima palabra es: " + vector[vector.length - 1]);
+        }
+    </script>
+</body>
+
+</html>

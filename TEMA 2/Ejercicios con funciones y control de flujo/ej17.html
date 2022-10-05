@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let nombre = prompt('Ingrese su nombre')
+        let cantidadPreguntas = parseInt(prompt('Ingrese la cantidad total de preguntas que se le realizaron'))
+        let cantidadPreguntasCorrectas = parseInt(prompt('Ingrese la cantidad de preguntas que contestó correctamente'))
+        let porcentajeAciertos = (cantidadPreguntasCorrectas/cantidadPreguntas)*100
+
+        if(porcentajeAciertos>=90){
+            alert('Nivel superior')
+        } else if (porcentajeAciertos>=75) {
+            alert('Nivel medio')
+        } else if (porcentajeAciertos>=50) {
+            alert('Nivel bajo')
+        } else{
+            alert('Fuera de nivel')
+        }
+
+
+    </script>
+</body>
+
+</html>
