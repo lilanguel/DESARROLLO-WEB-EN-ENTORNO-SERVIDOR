@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <form id="Ej3" action="">
+        <div class="Ej3">
+            <label for="DNI">DNI</label>
+            <input type="text" id="DNI" required>
+            <br>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required>
+            <br>
+            <label for="fNac">Fecha de Nacimiento</label>
+            <input type="text" id="fNac" required>
+            <br>
+            <label for="email">Escribe tu email: </label>
+            <input type="email" id="email" required>
+            <br>
+            <label for="web">Web Personal: </label>
+            <input type="url" id="web" required>
+            <br>
+            <label for="password">Contraseña: </label>
+            <input type="password" id="password" required>
+            <br>
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+    <script defer>
+        const $FORM = document.getElementById('Ej3');
+        const $DNI = document.getElementById('DNI');
+        const $NAME = document.getElementById('nombre');
+        const $FNAC = document.getElementById('fNac');
+        const $EMAIL = document.getElementById('email');
+        const $WEB = document.getElementById('web');
+        const $PASSWORD = document.getElementById('password');
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const dni = $DNI.value;
+            const name = $NAME.value;
+            const fnac = $FNAC.value;
+            const email = $EMAIL.value;
+            const web = $WEB.value;
+            const password = $PASSWORD.value;
+
+            if (dni == false || isValidDni(dni) == false) {
+                alert('El dni debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por el formato 99.999.999-X');
+            } else if (name == false || isValidName(name) == false) {
+                alert('El nombre debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por 1 o 2 palabras');
+            } else if (fnac == false || isValidFNac(fnac) == false) {
+                alert('La fecha de nacimiento debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por el formato dd/mm/yyyy');
+            } else if (email == false || isValidEmail(email) == false) {
+                alert('El email debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por el formato xxxxxx@yyyyy.zzz');
+            } else if (web == false || isValidWeb(web) == false) {
+                alert('La web debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por el formato http://www.xxxx.yyy');
+            } else if (password == false || isValidPassword(password) == false) {
+                alert('La contraseña debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesta entre 6 y 8 caracteres');
+            } else {
+                alert('Usuario correcto y registrado')
+                var regUsuario = {
+                    dni: dni, nombre: name, fnac: fnac, email: email, web: web, password: password
+                };
+                console.log(regUsuario);
+                var newUser = JSON.stringify(regUsuario);
+                console.log(newUser);
+
+                sessionStorage.setItem(`Dni`, `${dni}`);
+                sessionStorage.setItem(`Nombre`, `${name}`);
+                sessionStorage.setItem(`Fecha de nacimiento`, `${fnac}`);
+                sessionStorage.setItem(`Email`, `${email}`);
+                sessionStorage.setItem(`Web`, `${web}`);
+                sessionStorage.setItem(`Contrasena`, `${password}`);
+
+            }
+        }
+
+        function isValidDni(dni) {
+            const validacion = /^\d{8}[a-zA-Z]$/;
+            return validacion.test(dni);
+        }
+        function isValidName(name) {
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(name);
+        }
+        function isValidFNac(fnac) {
+            const validacion = /^\d{2}\/\d{2}\/\d{4}$/;
+            return validacion.test(fnac);
+        }
+        function isValidEmail(email) {
+            const validacion = /^(.+\@.+\..+)$/;
+            return validacion.test(email);
+        }
+        function isValidWeb(web) {
+            const validacion = /^(http|https)\:\/\/[a-z0-9\.-]+\.[a-z]{2,4}/;
+            return validacion.test(web);
+        }
+        function isValidPassword(password) {
+            const validacion = /^[a-zA-Z0-9!@#$%^&*]{6,8}$/;
+            return validacion.test(password);
+        }
+
+        $FORM.addEventListener('submit', handleSubmit);
+    </script>
+</body>
+</html>

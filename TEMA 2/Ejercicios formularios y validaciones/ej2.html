@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script src="cookies.js"></script>
+</head>
+
+<body>
+    <form id="Ej2" action="">
+        <div class="Ej2">
+            <label for="nombre">Escribe tu nombre: </label>
+            <input type="text" id="nombre" required>
+            <br>
+            <br>
+            <label for="apellido">Escribe tus apellidos: </label>
+            <input type="text" id="apellido" required>
+            <br>
+            <br>
+            <label for="email">Escribe tu email: </label>
+            <input type="email" id="email" required>
+            <br>
+            <br>
+            <label for="web">Web Personal: </label>
+            <input type="url" id="web" required>
+            <br>
+            <br>
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+    <script defer>
+        const $FORM = document.getElementById('Ej2');
+        const $NAME = document.getElementById('nombre');
+        const $SURNAME = document.getElementById('apellido');
+        const $EMAIL = document.getElementById('email');
+        const $WEB = document.getElementById('web');
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const name = $NAME.value;
+            const surname = $SURNAME.value;
+            const email = $EMAIL.value;
+            const web = $WEB.value;
+
+            if (name == false || isValidName(name) == false) {
+                alert('El nombre debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por 1 o 2 palabras');
+            } else if (surname == false || isValidSurname(surname) == false) {
+                alert('El apellido debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por 1 o 2 palabras');
+            } else if (email == false || isValidEmail(email) == false) {
+                alert('El email debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por el formato xxxxxx@yyyyy.zzz');
+            } else if (web == false || isValidWeb(web) == false) {
+                alert('La web debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por el formato http://www.xxxx.yyy');
+            } else {
+                alert('Usuario correcto y registrado')
+                var regUsuario = {
+                    nombre: name, apellido: surname, email: email, web: web
+                };
+                console.log(regUsuario);
+                var newUser = JSON.stringify(regUsuario);
+                console.log(newUser);
+
+                var medianoche = new Date();
+                medianoche.setHours(23, 59, 59, 0);
+
+                crearCookie("Usuario", `${name} ${surname}`, { expires: medianoche });
+                crearCookie("Email", `${email}`, { expires: medianoche });
+            }
+        }
+
+        function isValidName(name) {
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(name);
+        }
+        function isValidSurname(surname) {
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(surname);
+        }
+        function isValidEmail(email) {
+            const validacion = /^(.+\@.+\..+)$/;
+            return validacion.test(email);
+        }
+        function isValidWeb(web) {
+            const validacion = /^(http|https)\:\/\/[a-z0-9\.-]+\.[a-z]{2,4}/;
+            return validacion.test(web);
+        }
+
+        $FORM.addEventListener('submit', handleSubmit);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="Ej4" action="">
+        <label for="fCreacion">Fecha de Creacion:</label>
+        <input type="text" id="fCreacion" required>
+        <br>
+        <label for="cocinero">Cocinero:</label>
+        <input type="text" id="cocinero" required>
+        <br>
+        <label for="destinatario">Destinatario:</label>
+        <input type="text" id="destinatario" required>
+        <br>
+        <label for="gramos">Gramos:</label>
+        <input type="text" id="gramos" required>
+        <br>
+        <label for="composicion">Composicion:</label>
+        <input type="text" id="composicion" required>
+        <br>
+        <label for="cuenta">Numero de cuenta bancaria:</label>
+        <input type="text" id="cuenta" required>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+    <script defer>
+        const $FORM = document.getElementById('Ej4');
+        const $FCREACION = document.getElementById('fCreacion');
+        const $COCINERO = document.getElementById('cocinero');
+        const $DESTINATARIO = document.getElementById('destinatario');
+        const $GRAMOS = document.getElementById('gramos');
+        const $COMPOSICION = document.getElementById('composicion');
+        const $CUENTA = document.getElementById('cuenta');
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const fCreacion = $FCREACION.value;
+            const cocinero = $COCINERO.value;
+            const destinatario = $DESTINATARIO.value;
+            const gramos = $GRAMOS.value;
+            const composicion = $COMPOSICION.value;
+            const cuenta = $CUENTA.value;
+
+            if (fCreacion == false || isValidFCreacion(fCreacion) == false) {
+                alert('La fecha de creacion debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por el formato dd/mm/aaaa');
+            } else if (cocinero == false || isValidCocinero(cocinero) == false) {
+                alert('El cocinero debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por un nombre en clave formado por dos letras en mayúscula, un símbolo y cuatro dígitos');
+            } else if (destinatario == false || isValidDestinatario(destinatario) == false) {
+                alert('El destinatario debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por  dos o tres letras mayúsculas correspondientes al estado, un guión bajo, el nombre de la ciudad en minúsculas, dos puntos, y el código de distrito de 4 digitos');
+            } else if (gramos == false || isValidGramos(gramos) == false) {
+                alert('Los gramos debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por un número del 100 al 5000');
+            } else if (composicion == false || isValidComposicion(composicion) == false) {
+                alert('La composicion debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por una cantidad en gramos seguida de dos conjuntos de una o dos letras seguidas o no de un número');
+            } else if (cuenta == false || isValidCuenta(cuenta) == false) {
+                alert('La cuenta bancaria debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesta por el formato estadounidense');
+            } else {
+                alert('Usuario correcto y registrado')
+                var regUsuario = {
+                    fCreacion: fCreacion, cocinero: cocinero, destinatario: destinatario, gramos: gramos, composicion: composicion, cuenta: cuenta
+                };
+                console.log(regUsuario);
+                var newUser = JSON.stringify(regUsuario);
+                console.log(newUser);
+
+                if (typeof Storage !== "undefined") {
+                    //LocalStorage disponible
+                    localStorage.setItem("usuario", JSON.stringify(regUsuario));
+                } else {
+                    //LocalStorage no soportado en este navegador
+                }
+
+
+            }
+        }
+
+        function isValidFCreacion(fCreacion) {
+            const validacion = /^\d{2}\/\d{2}\/\d{4}$/;
+            return validacion.test(fCreacion);
+        }
+        function isValidCocinero(cocinero) {
+            const validacion = /[A-Z]{2}\W\d{3}/;
+            return validacion.test(cocinero);
+        }
+        function isValidDestinatario(destinatario) {
+            const validacion = /([A-Z]{2,3})+([_])+([a-z])+([:])+(\d{4})$/;
+            return validacion.test(destinatario);
+        }
+        function isValidGramos(gramos) {
+            const validacion = /\d{3,4}/;
+            return validacion.test(gramos);
+        }
+        function isValidComposicion(composicion) {
+            const validacion = /([0,9])+([g])+([A-Z]{1,2})+([0-9]{0,1})+([A-Z]{1,2})+([0-9]{0,1})$/;
+            return validacion.test(composicion);
+        }
+        function isValidCuenta(cuenta) {
+            const validacion = /([A-N] | [O-Z])+([A-N] | [O-Z]) +([-]) + (\d{12})+([-])/;
+            return validacion.test(cuenta);
+        }
+
+        $FORM.addEventListener('submit', handleSubmit);
+    </script>
+</body>
+
+</html>

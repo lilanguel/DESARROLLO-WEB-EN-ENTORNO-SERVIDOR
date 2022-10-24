@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script src="cookies.js"></script>
+</head>
+
+<body>
+    <form id="Ej1" action="">
+        <div class="Ej1">
+            <label for="DNI">DNI</label>
+            <input type="text" id="DNI" required>
+            <br>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required>
+            <br>
+            <label for="apellido">Apellidos</label>
+            <input type="text" id="apellido" required>
+            <br>
+            <label for="telefono">Telefono</label>
+            <input type="text" id="telefono" required>
+            <br>
+            <textarea name="Comentario" id="comentario" cols="60" rows="7" placeholder="Escriba aqui, por favor"
+                required></textarea>
+            <br>
+            <label for="hora">Elija una hora:</label>
+            <input type="time" id="hora" required>
+            <br>
+            <button type="submit">Enviar</button>
+            <div id="numIntentos">Numero de errores: </div>
+            <button type="reset" onclick="numErrores0()">Reiniciar Errores</button>
+        </div>
+    </form>
+    <script defer>
+        const $FORM = document.getElementById('Ej1');
+        const $DNI = document.getElementById('DNI');
+        const $NAME = document.getElementById('nombre');
+        const $SURNAME = document.getElementById('apellido');
+        const $TELEPHONE = document.getElementById('telefono');
+        const $COMMENTS = document.getElementById('comentario');
+        const $HOUR = document.getElementById('hora');
+        function handleSubmit(e) {
+            e.preventDefault();
+            const dni = $DNI.value;
+            const name = $NAME.value;
+            const surname = $SURNAME.value;
+            const telephone = $TELEPHONE.value;
+            const comentario = $COMMENTS.value;
+            const hour = $HOUR.value;
+
+            if (dni == false || isValidDni(dni) == false) {
+                alert('El dni debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por 8 caracteres y 1 letra');
+                let numErrores = parseInt(getCookie("numError"));
+
+                if (numErrores) {
+                    crearCookie("numError", ++numErrores);
+                } else {
+                    crearCookie("numError", 1);
+                }
+                numErrores = parseInt(getCookie("numError"))
+                document.getElementById("numIntentos").innerHTML = `Numero de Errores: ${numErrores}`;
+            } else if (name == false || isValidName(name) == false) {
+                alert('El nombre debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por 1 o 2 palabras');
+                let numErrores = parseInt(getCookie("numError"));
+
+                if (numErrores) {
+                    crearCookie("numError", ++numErrores);
+                } else {
+                    crearCookie("numError", 1);
+                }
+                numErrores = parseInt(getCookie("numError"))
+                document.getElementById("numIntentos").innerHTML = `Numero de Errores: ${numErrores}`;
+            } else if (surname == false || isValidSurname(surname) == false) {
+                alert('El apellido debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por 1 o 2 palabras');
+                let numErrores = parseInt(getCookie("numError"));
+
+                if (numErrores) {
+                    crearCookie("numError", ++numErrores);
+                } else {
+                    crearCookie("numError", 1);
+                }
+                numErrores = parseInt(getCookie("numError"))
+                document.getElementById("numIntentos").innerHTML = `Numero de Errores: ${numErrores}`;
+            } else if (telephone == false || isValidTelephone(telephone) == false) {
+                alert('El telefono debe ser un valor válido : \n -Debe estar relleno \n - Debe estar compuesto por el prefijo y 9 numeros');
+                let numErrores = parseInt(getCookie("numError"));
+
+                if (numErrores) {
+                    crearCookie("numError", ++numErrores);
+                } else {
+                    crearCookie("numError", 1);
+                }
+                numErrores = parseInt(getCookie("numError"))
+                document.getElementById("numIntentos").innerHTML = `Numero de Errores: ${numErrores}`;
+            } else if (comentario == false || isValidComent(comentario) == false) {
+                alert('El comentario debe ser un valor válido : \n -Debe estar relleno \n - Tiene un valor maximo de 250 caracteres');
+                let numErrores = parseInt(getCookie("numError"));
+
+                if (numErrores) {
+                    crearCookie("numError", ++numErrores);
+                } else {
+                    crearCookie("numError", 1);
+                }
+                numErrores = parseInt(getCookie("numError"))
+                document.getElementById("numIntentos").innerHTML = `Numero de Errores: ${numErrores}`;
+            } else if (hour == false || isValidHour(hour) == false) {
+                alert('La hora debe ser un valor válido : \n -Debe estar rellena \n - Tiene que ser del formato hora y minutos');
+                let numErrores = parseInt(getCookie("numError"));
+
+                if (numErrores) {
+                    crearCookie("numError", ++numErrores);
+                } else {
+                    crearCookie("numError", 1);
+                }
+                numErrores = parseInt(getCookie("numError"))
+                document.getElementById("numIntentos").innerHTML = `Numero de Errores: ${numErrores}`;
+            } else {
+                alert('Usuario correcto y registrado')
+                var regUsuario = {
+                    dni: dni, nombre: name, apellido: surname, telefono: telephone,
+                    comentario: comentario, hora: hour
+                };
+                console.log(regUsuario);
+                var newUser = JSON.stringify(regUsuario);
+                console.log(newUser);
+                crearCookie("numError", 0);
+            }
+        }
+
+        function isValidDni(dni) {
+            const validacion = /^\d{8}[a-zA-Z]$/;
+            return validacion.test(dni);
+        }
+        function isValidName(name) {
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(name);
+        }
+        function isValidSurname(surname) {
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(surname);
+        }
+        function isValidTelephone(telephone) {
+            const validacion = /^\+\d{2,3}\s\d{9}$/;
+            return validacion.test(telephone);
+        }
+        function isValidComent(comentario) {
+            const validacion = /^[\s\S]{1,250}$/;
+            return validacion.test(comentario);
+        }
+        function isValidHour(hour) {
+            const validacion = /^(0[1-9]|1\d|2[0-3]):([0-5]\d)$/;
+            return validacion.test(hour);
+        }
+        $FORM.addEventListener('submit', handleSubmit);
+        let numErrores= getCookie("numError");
+        document.getElementById("numIntentos").innerHTML = `Numero de Errores: ${numErrores}`;
+
+        function numErrores0() {
+            crearCookie("numError", 0);
+            document.getElementById("numIntentos").innerHTML = `Numero de Errores: 0`;
+        }
+    </script>
+</body>
+
+</html>
