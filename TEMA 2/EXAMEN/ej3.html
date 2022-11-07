@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ej3</title>
+</head>
+
+<body>
+    <script>
+        let respuesta = "SI";
+        while (respuesta == "SI") {
+            let numRandom = parseInt(Math.random() * (50 - 1) + 1);
+            let num = parseInt(prompt('Introduce un numero'));
+
+            while (isNaN(num)) {
+                alert('Error. El numero introducido no es un numero');
+                num = parseInt(prompt('Introduce un numero'));
+            }
+
+            let numErrores = 0;
+
+            while (num != numRandom) {
+                if (num > numRandom) {
+                    alert('El numero introducido es mayor que el numero secreto')
+                    num = parseInt(prompt('Introduce un numero'));
+                } else {
+                    alert('El numero introducido es menor que el numero secreto')
+                    num = parseInt(prompt('Introduce un numero'));
+                }
+                numErrores++;
+                if (numErrores == 4) {
+                    break;
+                }
+            }
+
+            if (num == numRandom) {
+                alert('HAS GANADO, ERES UN CRACK!!!')
+            } else {
+                alert('HASPERDIDO, OTRA VEZ SERÁ!!!')
+            }
+
+            respuesta = prompt('Quieres volver a jugar?')
+        }
+    </script>
+</body>
+
+</html>

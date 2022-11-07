@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ej4</title>
+</head>
+
+<body>
+    <form id="Ej4" action="">
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" required>
+        <br>
+        <label for="nombre">NOMBRE:</label>
+        <input type="text" id="nombre" required>
+        <br>
+        <label for="apellido">APELLIDOS:</label>
+        <input type="text" id="apellido" required>
+        <br>
+        <label for="fCita">FECHA DE CITA:</label>
+        <input type="text" id="fCita" required>
+        <br>
+        <label for="hCita">HORA DE CITA:</label>
+        <input type="time" id="hCita" required>
+        <br>
+        <label>Elija medio de confirmación de la cita: </label>
+        <input type="radio" name="radio" id="telefono">
+        <label for="telefono">Telefono</label>
+        <input type="radio" name="radio" id="email">
+        <label for="email">Email</label>
+        <input type="text" id="texto_confirmacion">
+        <button type="submit">Enviar</button>
+    </form>
+    <script defer>
+        const $FORM = document.getElementById('Ej4');
+        const $DNI = document.getElementById('dni');
+        const $NAME = document.getElementById('nombre');
+        const $SURNAME = document.getElementById('apellido');
+        const $FCITA = document.getElementById('fCita');
+        const $HCITA = document.getElementById('hCita');
+        const $TEXTOCONFIRMACION = document.getElementById('texto_confirmacion');
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const dni = $DNI.value;
+            const name = $NAME.value;
+            const surname = $SURNAME.value;
+            const fcita = $FCITA.value;
+            const hcita = $HCITA.value;
+            const texto_confirmacion = $TEXTOCONFIRMACION.value;
+
+            if (dni == false || isValidDni(dni) == false) {
+                alert('El dni debe ser un valor válido : \n - Debe estar relleno \n - Debe estar compuesto por el formato 99.999.999X');
+            } else if (name == false || isValidName(name) == false) {
+                alert('El nombre debe ser un valor válido : \n - Debe estar relleno \n - Debe estar compuesto por 1 o 2 palabras');
+            } else if (surname == false || isValidSurname(surname) == false) {
+                alert('El apellido debe ser un valor válido : \n - Debe estar relleno \n - Debe estar compuesto por 1 o 2 palabras');
+            } else if (fcita == false || isValidFCita(fcita) == false) {
+                alert('La fecha debe ser un valor válido : \n - Debe estar relleno \n - Debe estar compuesto por el formato dd-mm-yyyy');
+            } else if (hcita == false || isValidHCita(hcita) == false) {
+                alert('La hora debe ser un valor válido : \n - Debe estar rellena \n - Tiene que ser del formato hora y minutos');
+            } else {
+                alert('Cita correcta y registrada')
+                var regUsuario = {
+                    dni: dni, nombre: name, apellidos: surname, fcita: fcita, hcita: hcita, confirmacion: texto_confirmacion
+                };
+                console.log(regUsuario);
+                var newUser = JSON.stringify(regUsuario);
+                console.log(newUser);
+
+                if (typeof Storage !== "undefined") {
+                    //LocalStorage disponible
+                    localStorage.setItem("Cita de usuario", JSON.stringify(regUsuario));
+                } else {
+                    //LocalStorage no soportado en este navegador
+                }
+            }
+        }
+
+        function isValidDni(dni) {
+            const validacion = /^[0-9]{2}\.[0-9]{3}\.[0-9]{3}[a-zA-Z]$/;
+            return validacion.test(dni);
+        }
+
+        function isValidName(name) {
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(name);
+        }
+
+        function isValidSurname(surname) {
+            const validacion = /^(([\wáéíóúÁÉÍÓÚ]+)|([\wáéíóúÁÉÍÓÚ]+\s[\wáéíóúÁÉÍÓÚ]+))$/;
+            return validacion.test(surname);
+        }
+
+        function isValidFCita(fecha) {
+            const validacion = /^\d{2}\-\d{2}\-\d{4}$/;
+            return validacion.test(fecha);
+        }
+
+        function isValidHCita(hour) {
+            const validacion = /^(0[1-9]|1\d|2[0-3]):([0-5]\d)$/;
+            return validacion.test(hour);
+        }
+
+        function isValidPhone(phone) {
+            const validacion = /^\+\d{2,3}\s\d{3}\s\d{3}\s\d{3}$/;
+            return validacion.test(phone);
+        }
+
+        function isValidEmail(email) {
+            const validacion = /^(.+\@.+\..+)$/;
+            return validacion.test(email);
+        }
+
+        $FORM.addEventListener('submit', handleSubmit);
+    </script>
+</body>
+
+</html>

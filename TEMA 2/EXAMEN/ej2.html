@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ej2</title>
+</head>
+
+<body>
+    <form>
+        <label for="cadena">Introduce una texto</label>
+        <input type="text" id="cadena">
+        <br>
+        <button type="submit" onclick="numPalabras()">Calcular el numero de palabras</button>
+        <button type="submit" onclick="primeraPalabra()">Mostrar la primera palabra</button>
+        <button type="submit" onclick="ultimaPalabra()">Mostrar la ultima palabra</button>
+        <button type="submit" onclick="esPalindroma()">Mostrar si es palindroma</button>
+        <button type="submit" onclick="ordenaPalabras()">Devolver las palabras ordenadas de mayor a menor
+            longitud</button>
+    </form>
+    <script>
+        function numPalabras() {
+            let cadena = document.getElementById("cadena").value;
+            let arrayCadena = cadena.split(" ");
+            let palabrasCadena = arrayCadena.length;
+            alert(`Tamano de la cadena introducida: ${palabrasCadena}`);
+        }
+
+        function primeraPalabra() {
+            let cadena = document.getElementById("cadena").value;
+            let arrayCadena = cadena.split(" ");
+            let primeraPalabra = arrayCadena[0];
+            alert(`Primera palabra de la cadena introducida: ${primeraPalabra}`);
+        }
+
+        function ultimaPalabra() {
+            let cadena = document.getElementById("cadena").value;
+            let arrayCadena = cadena.split(" ");
+            let ultimaPalabra = arrayCadena[arrayCadena.length - 1];
+            alert(`Ultima palabra de la cadena introducida: ${ultimaPalabra}`);
+        }
+
+        function esPalindroma() {
+            let Cadena = document.getElementById("cadena").value;
+            var re = /[\W_]/g;
+
+            var lowRegCadena = Cadena.toLowerCase().replace(re, '');
+
+            var reverseCadena = lowRegCadena.split('').reverse().join('');
+
+            if (reverseCadena === lowRegCadena) {
+                alert('La cadena introducida es palindroma');
+            } else {
+                alert('La cadena introducida no es palindroma');
+            }
+        }
+
+        function ordenaPalabras() {
+            let cadena = document.getElementById("cadena").value;
+            let arrayCadena = cadena.split(" ");
+
+
+            for (let i = 0; i < arrayCadena.length; ++i) {
+                for (let j = i + 1; j < arrayCadena.length; ++j) {
+
+                    if (arrayCadena[i].length > arrayCadena[j].length) {
+                        let auxiliar = arrayCadena[i];
+                        arrayCadena[i] = arrayCadena[j];
+                        arrayCadena[j] = auxiliar;
+                    }
+                }
+            }
+
+            alert(arrayCadena);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ej1</title>
+</head>
+
+<body>
+    <script>
+        let plato = prompt('Elija el plato que quire (Nº1, Nº2, Nº3, Nº4 y Nº5)');
+
+        let preguntaEntrante = prompt('Desea un entrante? Si/No');
+        let cantidadEntrantes = 0;
+        if (preguntaEntrante == "Si") {
+            cantidadEntrantes = parseInt(prompt('Cuantos entrantes desea?'))
+        }
+
+        let preguntaBebida = prompt('Desea una bebida? Si/No');
+        let cantidadBebidas =0;
+        if (preguntaBebida == "Si") {
+            cantidadBebidas = parseInt(prompt('Cuantas bebidas desea?'))
+        }
+
+        let preguntaPostre = prompt('Desea un postre? Si/No');
+        let cantidadPostres = 0;
+        if (preguntaPostre == "Si") {
+            cantidadPostres = parseInt(prompt('Cuantos postres desea?'))
+        }
+
+        let preguntaVIP = prompt('Eres VIP? Si/No');
+
+        let precioTotal = 6+cantidadEntrantes+cantidadBebidas+cantidadPostres;
+        let descuentoVIP = precioTotal*0.05;
+        let impuestoIVAPlato = 6*0.1;
+        let impuestoIVAEntrantes = cantidadEntrantes*0.1;
+        let impuestoIVABebidas = cantidadBebidas*0.21;
+        let impuestoIVAPostres = cantidadPostres*0.1;
+
+        let precioConDescuentos = precioTotal-descuentoVIP;
+        let precioConImpuestos = precioTotal+impuestoIVAPlato+impuestoIVAEntrantes+impuestoIVABebidas+impuestoIVAPostres;
+
+        alert(`DETALLE DE LA COMANDA: \n - Precio Total: ${precioTotal} \n - Precio con descuento VIP: ${precioConDescuentos} \n - Precio con impuestos: ${precioConImpuestos}`);
+    </script>
+</body>
+
+</html>
